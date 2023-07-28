@@ -107,7 +107,7 @@ double measureTime(std::vector<int>& arr, void (*sortingAlgorithm)(std::vector<i
 int main() {
     const int N = 10000000; // テスト用のデータサイズ
     const int numTrials = 30; // 平均を取る試行回数
-		const int rndbits = __builtin_popcount(RAND_MAX);
+    const int rndbits = __builtin_popcount(RAND_MAX);
 
     std::vector<int> Arr(N);
 
@@ -120,19 +120,19 @@ int main() {
 
     // 平均実行時間を計測
     for (int i = 0; i < numTrials; ++i) {
-				std::cout << i+1 << ": ";
-				for (int i = 0; i < N; ++i) {
-						int val = (rand() << rndbits) | rand();
-						Arr[i] = val;
-				}
+        std::cout << i+1 << ": ";
+        for (int i = 0; i < N; ++i) {
+            int val = (rand() << rndbits) | rand();
+            Arr[i] = val;
+        }
         std::vector<int> flashCopy = Arr; // 元のデータをコピー
         std::vector<int> radixCopy = Arr; // 元のデータをコピー
         std::vector<int> stdsortCopy = Arr; // 元のデータをコピー
 
         totalFlashTime += measureTime(flashCopy, flashSort);
         totalRadixTime += measureTime(radixCopy, radixSort);
-				totalstdsortTime += measureTime(stdsortCopy, stdsort);
-				std::cout << "done!" << std::endl;
+        totalstdsortTime += measureTime(stdsortCopy, stdsort);
+        std::cout << "done!" << std::endl;
     }
 
     double avgFlashTime = totalFlashTime / numTrials;
