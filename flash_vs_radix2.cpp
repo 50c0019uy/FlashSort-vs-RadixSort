@@ -75,19 +75,19 @@ void radixSort(std::vector<llong>& arr) {
     llong maxVal = *std::max_element(arr.begin(), arr.end());
 
     // バケットごとに桁の値を考慮してソートする
-    for (llong exp = 1; maxVal / exp > 0; exp *= 10000) {
+    for (llong exp = 1; maxVal / exp > 0; exp *= 1000000) {
         std::vector<llong> output(arr.size());
-        std::vector<llong> count(10000, 0);
+        std::vector<llong> count(1000000, 0);
 
         for (llong i = 0; i < arr.size(); i++)
-            count[(arr[i] / exp) % 10000]++;
+            count[(arr[i] / exp) % 1000000]++;
 
-        for (llong i = 1; i < 10000; i++)
+        for (llong i = 1; i < 1000000; i++)
             count[i] += count[i - 1];
 
         for (llong i = arr.size() - 1; i >= 0; i--) {
-            output[count[(arr[i] / exp) % 10000] - 1] = arr[i];
-            count[(arr[i] / exp) % 10000]--;
+            output[count[(arr[i] / exp) % 1000000] - 1] = arr[i];
+            count[(arr[i] / exp) % 1000000]--;
         }
 
         arr = output;
